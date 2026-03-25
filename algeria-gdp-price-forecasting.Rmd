@@ -12,11 +12,84 @@ colnames(df)
 df_ts <- ts(df$Gdp, start = min(as.numeric(format(df$Year, "%Y"))), frequency = 1)  
 
 # Plot time series
-plot(df_ts, 
-     main = "Algeria GDP Time Series", 
-     xlab = "Year", 
-     ylab = "GDP (USD)", 
-     col = "blue", 
+plot(df_ts / 1e9,
+     main="Algeria GDP Time Series",
+     xlab="Year",
+     ylab="GDP (Billion USD)",
+     col="blue",
+     lwd=2)
+```
+```{r}
+log_ts <- log(df_ts)
+plot(log_ts, col="blue", lwd=2,
+     main="Log Algeria GDP",
+     xlab="Year",
+     ylab="log(GDP)")
+```
+
+```{r}
+diff_log_ts <- diff(log_ts)
+
+plot(diff_log_ts,
+     main = "First Difference of Log GDP",
+     xlab = "Year",
+     ylab = "Δ log(GDP)",
+     col = "blue",
      lwd = 2)
+```
+
+```{r}
+adf.test(diff_log_ts)
+```
+```{r}
+sec_diff_log_ts <- diff(diff_log_ts)
+plot(sec_diff_log_ts,
+     main = "First Difference of Log GDP",
+     xlab = "Year",
+     ylab = "Δ log(GDP)",
+     col = "blue",
+     lwd = 2)
+
+```
+
+```{r}
+adf.test(sec_diff_log_ts)
+```
+
+```{r}
+# ACF plot
+Acf(sec_diff_log_ts, main="ACF of Second Difference of Log GDP")
+
+# PACF plot
+Pacf(sec_diff_log_ts, main="PACF of Second Difference of Log GDP")
+```
+```{r}
+# Candidate models: ARIMA(2,2,1) and ARIMA(3,2,1)
+fit_221 <- Arima(sec_diff_log_ts, order=c(2,2,1))
+fit_321 <- Arima(sec_diff_log_ts, order=c(3,2,1))
+
+# View estimated parameters
+summary(fit_221)
+summary(fit_321)
+```
+```{r}
+residuals_model <- residuals(fit_321)
+
+# Plot ACF and PACF of residuals
+par(mfrow=c(1,2))  # plot side by side
+acf(residuals_model, main="ACF of Residuals (ARIMA 3,2,1)")
+pacf(residuals_model, main="PACF of Residuals (ARIMA 3,2,1)")
+qqnorm(residuals_model, main="QQ Plot of ARIMA(3,2,1) Residuals")
+qqline(residuals_model, col="red")
+hist(residuals_model, 
+     main = "Histogram of ARIMA Residuals", 
+     xlab = "Residuals", 
+     col = "skyblue", 
+     border = "white")
+# normality test
+shapiro.test(residuals_model)
+# Ljung-Box test for residuals
+Box.test(residuals_model, lag=20, type="Ljung-Box")
+
 ```
 
