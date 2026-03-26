@@ -1,8 +1,6 @@
 # Algeria’s GDP Using Time Series Analysis
 
-## ARIMA Time Series Analysis of Algeria GDP
-
-### Phase I: Identification
+## Phase I: Identification
 <img width="952" height="507" alt="image" src="https://github.com/user-attachments/assets/066963eb-23fc-4687-a630-0b668bf85c25" />
 
 #### Data Preparation
@@ -29,7 +27,7 @@
 
 ---
 
-### Phase II: Estimation and Testing
+## Phase II: Estimation and Testing
 
 #### Estimation
 * **Chosen Model:** ARIMA(3,2,1)
