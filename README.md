@@ -1,4 +1,4 @@
-# Algeria’s GDP Using Time Series Analysis
+# Algeria’s GDP Study Using Time Series Analysis
 
 ## Phase I: Identification
 
