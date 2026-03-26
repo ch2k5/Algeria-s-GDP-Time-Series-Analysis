@@ -50,5 +50,3 @@ Conclusion
 The ARIMA(3,2,1) model fits the GDP series reasonably well in terms of normality and capturing overall trends.
 However, residuals exhibit significant autocorrelation and are not white noise.
 Therefore, we cannot proceed to the forecasting phase without further refinement.
-
-Potential improvements include adding seasonal components (SARIMA), using alternative models like Exponential Smoothing, or including external regressors.
