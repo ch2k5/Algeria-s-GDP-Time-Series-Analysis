@@ -1,14 +1,14 @@
 # Algeria’s GDP Using Time Series Analysis
 
 ## Phase I: Identification
-<img width="952" height="507" alt="image" src="https://github.com/user-attachments/assets/066963eb-23fc-4687-a630-0b668bf85c25" />
+<img width="446" height="253.5" alt="image" src="https://github.com/user-attachments/assets/066963eb-23fc-4687-a630-0b668bf85c25" />
 
 #### Data Preparation
 * **Log Transformation:** A logarithmic transformation was applied to stabilize the variance of the GDP series and reduce the effect of exponential growth.
-  <img width="952" height="507" alt="image" src="https://github.com/user-attachments/assets/3ee196c1-d3aa-47eb-8e6a-f6237e5beb26" />
+  <img width="446" height="253.5" alt="image" src="https://github.com/user-attachments/assets/3ee196c1-d3aa-47eb-8e6a-f6237e5beb26" />
 
 * **Differencing to Remove Trend:** The first difference of the log-transformed GDP series was taken to remove the trend and achieve stationarity.
-  <img width="952" height="507" alt="image" src="https://github.com/user-attachments/assets/7a5fe1b7-4134-424f-9cff-aa576a631cc3" />
+  <img width="446" height="253.5" alt="image" src="https://github.com/user-attachments/assets/7a5fe1b7-4134-424f-9cff-aa576a631cc3" />
 
 * **Stationarity Test (Augmented Dickey-Fuller):** The ADF test on the first-differenced log GDP series produced a p-value of 0.4408 (> 0.05), indicating failure to reject the null hypothesis of a unit root. The series remained non-stationary. After a second differencing, the series became stationary.
   <img width="937" height="173" alt="image" src="https://github.com/user-attachments/assets/2f45eac6-c8a2-4d27-b4ae-30d5be041889" />
