@@ -5,13 +5,8 @@ This project applies **time series analysis** to model and forecast Algeria's **
 The goal is to capture the underlying dynamics of the GDP time series and generate reliable short-term forecasts.
 
 ---
-
-## Objectives
-- Analyze Algeria's historical GDP time series.
-- Identify suitable ARIMA parameters using **ACF and PACF analysis**.
-- Compare candidate models using **AIC and BIC** criteria.
-- Validate the selected model through **residual diagnostics**.
-- Produce forecasts for future GDP values.
+## Objective
+The objective of this project is to analyze Algeria's GDP time series and apply **ARIMA modeling** to identify an appropriate forecasting model for future GDP values.
 
 ---
 
