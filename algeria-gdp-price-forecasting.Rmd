@@ -19,7 +19,15 @@ plot(df_ts / 1e9,
      col="blue",
      lwd=2)
 ```
+
 ```{r}
+lambda <- BoxCox.lambda(df_ts)
+
+lambda
+```
+
+```{r}
+
 log_ts <- log(df_ts)
 plot(log_ts, col="blue", lwd=2,
      main="Log Algeria GDP",
@@ -41,10 +49,11 @@ plot(diff_log_ts,
 ```{r}
 adf.test(diff_log_ts)
 ```
+
 ```{r}
 sec_diff_log_ts <- diff(diff_log_ts)
 plot(sec_diff_log_ts,
-     main = "First Difference of Log GDP",
+     main = "Second Difference of Log GDP",
      xlab = "Year",
      ylab = "Δ log(GDP)",
      col = "blue",
@@ -63,23 +72,25 @@ Acf(sec_diff_log_ts, main="ACF of Second Difference of Log GDP")
 # PACF plot
 Pacf(sec_diff_log_ts, main="PACF of Second Difference of Log GDP")
 ```
+
 ```{r}
 # Candidate models: ARIMA(2,2,1) and ARIMA(3,2,1)
-fit_221 <- Arima(sec_diff_log_ts, order=c(2,2,1))
-fit_321 <- Arima(sec_diff_log_ts, order=c(3,2,1))
+fit_221 <- Arima(df_ts, order=c(2,2,1),lambda=lambda)
+fit_321 <- Arima(df_ts, order =c(3,2,1), lambda = lambda)
 
 # View estimated parameters
 summary(fit_221)
 summary(fit_321)
 ```
+
 ```{r}
-residuals_model <- residuals(fit_321)
+residuals_model <- residuals(fit_221)
 
 # Plot ACF and PACF of residuals
 par(mfrow=c(1,2))  # plot side by side
-acf(residuals_model, main="ACF of Residuals (ARIMA 3,2,1)")
-pacf(residuals_model, main="PACF of Residuals (ARIMA 3,2,1)")
-qqnorm(residuals_model, main="QQ Plot of ARIMA(3,2,1) Residuals")
+acf(residuals_model, main="ACF of Residuals (ARIMA 2,2,1)")
+pacf(residuals_model, main="PACF of Residuals (ARIMA 2,2,1)")
+qqnorm(residuals_model, main="QQ Plot of ARIMA(2,2,1) Residuals")
 qqline(residuals_model, col="red")
 hist(residuals_model, 
      main = "Histogram of ARIMA Residuals", 
@@ -90,6 +101,21 @@ hist(residuals_model,
 shapiro.test(residuals_model)
 # Ljung-Box test for residuals
 Box.test(residuals_model, lag=20, type="Ljung-Box")
+
+```
+
+
+
+```{r}
+# Forecast 12 steps ahead
+fc <- forecast(fit_221, h = 12)
+fc$mean  <- fc$mean / 1e9
+fc$lower <- fc$lower / 1e9
+fc$upper <- fc$upper / 1e9
+
+
+# Print forecast values
+print(fc)
 
 ```
 
