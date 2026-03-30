@@ -1,4 +1,4 @@
-# Algeria GDP Forecasting using ARIMA
+# Algeria GDP Time series Analysis and Forecasting 
 
 ## Overview
 This project applies **time series analysis** to model and forecast Algeria's **Gross Domestic Product (GDP)** using the **ARIMA (AutoRegressive Integrated Moving Average)** method.  
